@@ -4,6 +4,46 @@ $(() => {
 
 
 
+
+  $.ajax({
+    method: "get",
+    url: "http://localhost:3000/accounts",
+    dataType: "json",
+  }).done((accountList) => {
+    console.log("Get account value.", accountList);
+
+    for (let i = 0; i < accountList.length; i++) {
+      const newAccount = new Account(accountList[i].username);
+      newAccount.id = accountList[i].id;
+      newAccount.transactions = accountList[i].transactions;
+      accounts.push(newAccount);
+
+    
+      $(".inputAccountSelect").append(
+        <option value="${newAccount.id}">${newAccount.username}</option>
+      );
+
+      $(".inputAccountFrom").append(
+        <option value="${newAccount.id}">${newAccount.username}</option>
+      );
+
+      $(".inputAccountTo").append(
+        <option value="${newAccount.id}">${newAccount.username}</option>
+      );
+
+      $(".filterAccount").append(
+        <option value="${newAccount.id}">${newAccount.username}</option>
+      );
+    }
+  });
+
+
+
+
+
+
+
+
   $("#categoryInfo").hide();
 
   $.ajax({
