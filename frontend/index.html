@@ -18,20 +18,31 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./css/index.css" />
   </head>
+
+
+
   <body>
     myTrakr
     <main>
-      <form action="">
-        New Account:
-        <input type="text" />
-        <button>Add new account</button>
+
+      <form id="newAccount" action="">
+         <p class="newAccount">New Account:</p>
+        <input id="newAccountName" type="text" />
+        <button id="newAccountNameButton">Add new account</button>
       </form>
-      <form action="">
-        New Transaction: Deposit
-        <input type="radio" />
-        Withdraw
-        <input type="radio" />
-        Transfer
+
+      <form id="newTransaction" action="">
+        <p class="newTransaction">New Transaction:</p>
+        <input class="newTransactionText" type="radio" name="transaction" value="deposit"/>
+        <label for="deposit">Deposit</label>
+
+        <input class="newTransactionText" type="radio" name="transaction" value="withdraw"/>
+        <label for="withdraw">Withdraw</label>
+
+        <input class="newTransactionText" type="radio" name="transaction" value="transfer"/>
+        <label for="transfer">Transfer</label>
+
+        
         <input type="radio" />
         Account:
         <select></select>
@@ -54,6 +65,8 @@
 
         <button>Add transaction</button>
       </form>
+
+      
 
       Account summary
       <ul></ul>
