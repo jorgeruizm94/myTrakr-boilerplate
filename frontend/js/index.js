@@ -4,7 +4,29 @@ $(() => {
 
 
 
+  $("#categoryInfo").hide();
 
+  $.ajax({
+    method: "get",
+    url: "http://localhost:3000/categories",
+    dataType: "json",
+  }).done((categoriesList) => {
+    console.log("Get categories value.", categoriesList);
+  
+  
+  
+    for (let i = 0; i < categoriesList.length; i++) {
+      $(".categories").append(
+        <option value="${categoriesList[i].name.newCategory}">${categoriesList[i].name.newCategory}</option>
+      );
+    }
+  
+  
+    $(".categories").append(<option value="1">Add New Category</option>);
+  });
+  
+  
+  
 
 
 
@@ -83,28 +105,6 @@ if (storedAccount) {
 
 
 
-
-
-$("#categoryInfo").hide();
-
-$.ajax({
-  method: "get",
-  url: "http://localhost:3000/categories",
-  dataType: "json",
-}).done((categoriesList) => {
-  console.log("Get categories value.", categoriesList);
-
-
-
-  for (let i = 0; i < categoriesList.length; i++) {
-    $(".categories").append(
-      <option value="${categoriesList[i].name.newCategory}">${categoriesList[i].name.newCategory}</option>
-    );
-  }
-
-
-  $(".categories").append(<option value="1">Add New Category</option>);
-});
 
 
 
