@@ -74,19 +74,33 @@
 
   
 
-        Category:
-        <select></select>
-        <input type="text" />
-        <button type="button">Add new category</button>
 
-        Description
-        <input type="text" />
 
-        Amount:
-        <input type="number" />
+        <div id="category">
+          Category:
+          <select class="categories" id="categories">
+            <option value="0">
+              Select Category
+            </option>
+          </select>
 
-        <button>Add transaction</button>
-      </form>
+
+          <div id="categoryInfo" class="categoryInfo">
+            <input id="inputNewCategory" class="inputNewCategory" type="text" />
+
+            <button id="buttonNewCategory" type="button">
+              Add new category
+            </button>
+            <label for="descriptionCategory">
+              Description
+            </label>
+
+            <input id="descriptionCategory" class="descriptionCategory" type="text" />  
+
+          </div>  
+        </div>
+
+
 
 
 
@@ -107,10 +121,16 @@
         </tr>
       </table>
     </main>
+
+
+
     <script src="./js/helpers/Account.js"></script>
     <script src="./js/helpers/Category.js"></script>
     <script src="./js/helpers/Common.js"></script>
     <script src="./js/helpers/Transaction.js"></script>
     <script src="./js/index.js"></script>
+
+
+    
   </body>
 </html>
