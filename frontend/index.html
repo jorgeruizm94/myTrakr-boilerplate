@@ -102,24 +102,46 @@
 
 
 
+        <div id="amount">
+          Amount:
+          <input class="inputAmount" type="number" />
+          <button id="buttonNewTransaction" type="button">
+            Add transaction
+          </button>
+        </div>
 
 
-      Account summary
-      <ul></ul>
-      Filter by account:
-      <select></select>
-      <table>
-        <tr>
-          <th>Id</th>
-          <th>Username</th>
-          <th>Transaction Type</th>
-          <th>Category</th>
-          <th>Description</th>
-          <th>Amount</th>
-          <th>From</th>
-          <th>To</th>
-        </tr>
-      </table>
+
+
+      </form>
+
+
+      <div class="summary">
+        <p>Account summary:</p>
+        <ul class="accountSummary"></ul>
+      </div>
+      
+      <div class="filter">
+        <p>Filter by account:</p>
+        <select class="filterAccount">
+          <option value="0">All</option>
+        </select>
+        <table id="transactionsTable">
+          <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Transaction Type</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>From</th>
+            <th>To</th>
+          </tr>
+        </table>
+      </div>
+
+
+      
     </main>
 
 
@@ -131,6 +153,6 @@
     <script src="./js/index.js"></script>
 
 
-    
+
   </body>
 </html>

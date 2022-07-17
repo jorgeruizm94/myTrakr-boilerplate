@@ -21,3 +21,12 @@ class Deposit extends Transaction {
     return this.amount;
   }
 }
+
+
+class Transfer extends Transaction {
+  constructor(accountIdFrom, accountIdTo) {
+    super(amount);
+    this.accountIdFrom = accountIdFrom;
+    this.accountIdTo = accountIdTo;
+  }
+}

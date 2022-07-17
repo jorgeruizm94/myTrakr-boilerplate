@@ -1,5 +1,18 @@
 $(() => {
 
+const accounts = [];
+
+
+function returnBalance(accountID) {
+  for (let i = 0; i < accounts.length; i++) {
+    if (accountID == accounts[i].id) {
+      return accounts[i].balance;
+    }
+  }
+}
+
+
+
 
 
 
@@ -34,7 +47,14 @@ $(() => {
       $(".filterAccount").append(
         <option value="${newAccount.id}">${newAccount.username}</option>
       );
+
+
+
+      $(".accountSummary").append(
+        <li id=${newAccount.id}>Username: ${newAccount.username} - Balance: ${newAccount.balance}</li>
+      );
     }
+    
   });
 
 
@@ -44,6 +64,8 @@ $(() => {
 
 
 
+
+  
   $("#categoryInfo").hide();
 
   $.ajax({
@@ -65,7 +87,10 @@ $(() => {
     $(".categories").append(<option value="1">Add New Category</option>);
   });
   
-  
+
+
+
+
   
 
 
@@ -247,6 +272,9 @@ $('input[type="radio"]').click(function () {
 
 
 
+
+
+
 $('input[type="radio"]').click(function () {
   let inputValue = $(this).attr("value");
   if (inputValue == "transfer") {
@@ -260,7 +288,116 @@ $('input[type="radio"]').click(function () {
 
 
 
+$("#formNewTransaction").submit((e) => {
+  e.preventDefault();
+  console.log($("input").val());
+});
 
+
+$("#buttonNewTransaction").click(function () {
+  let inputTransaction = $("input[name='transaction']:checked").val();
+  let inputAccountTransaction = $(".inputAccountSelect").val();
+  let inputFromTransaction = $(".inputAccountFrom").val();
+  let inputToTransaction = $(".inputAccountTo").val();
+  let inputCategoryTransaction = $(".categories").val();
+  let inputAmmount = $(".inputAmount").val();
+
+  let validTransaction = true;
+
+
+if (inputAmmount <= 0) {
+  alert("The amount should be bigger than 0.");
+  validTransaction = false;
+}
+
+
+if (inputCategoryTransaction == 0) {
+  alert("The category can not be empty.");
+  validTransaction = false;
+}
+
+
+if (inputTransaction == "transfer") {
+  if (inputFromTransaction == "0") {
+    alert("The account From can not be empty.");
+    validTransaction = false;
+  }
+  if (inputToTransaction == "0") {
+    alert("The account To can not be empty.");
+    validTransaction = false;
+  }
+  
+  if (inputFromTransaction == inputToTransaction) {
+    alert("The account To and From can not be the same.");
+    validTransaction = false;
+  }
+}
+
+
+if (inputTransaction == "deposit" || inputTransaction == "withdraw") {
+  if (inputAccountTransaction == 0) {
+    alert("The account can not be empty.");
+    validTransaction = false;
+  }
+}
+
+
+if(inputTransaction == undefined) {
+  alert("The transaction can not be empty.");
+  validTransaction = false;
+}
+
+
+
+if (inputTransaction == "transfer") {
+  let balance = returnBalance(inputFromTransaction);
+
+  if (balance < inputAmmount) {
+    alert("The amount is not enough to do the transaction.");
+    validTransaction = false;
+  }
+} 
+if (inputTransaction == "withdraw") {
+  let balance = returnBalance(inputAccountTransaction);
+
+  if (balance < inputAmmount) {
+    alert("The amount is not enough to do the transaction.");
+    validTransaction = false;
+  }
+}   
+
+
+if (validTransaction) {
+  const newTransaction = {
+    transaction: inputTransaction,
+    accountId: inputAccountTransaction,
+    accountIdFrom: inputFromTransaction,
+    accountIdTo: inputToTransaction,
+    category: inputCategoryTransaction,
+    amount: inputAmmount,
+  };
+
+
+  $.ajax({
+    method: "POST",
+    data: JSON.stringify({
+      newTransaction,
+    }),
+    url: "http://localhost:3000/transactions",
+    dataType: "json",
+    contentType: "application/json",
+  }).done((data) => {
+    alert("New transaction posted.", data);
+
+    $("#transactionsTable").append(
+      <tr> <td>${data[0].accountId}</td> <td>${data[0].id}</td> <td>${data[0].id}</td> <td>${data[0].transaction}</td> <td>${data[0].category}</td> <td>${data[0].amount}</td> <td>${data[0].accountIdFrom == 0 ? `- : data[0].accountIdFrom}</td> <td>${data[0].accountIdTo == 0 ? - : data[0].accountIdTo}</td></tr>`
+    );
+
+  });
+} else {
+  alert("The transaction was unsuccessful. Try again.");
+}
+});
 
 
 
