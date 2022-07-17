@@ -42,16 +42,38 @@
         <input class="newTransactionText" type="radio" name="transaction" value="transfer"/>
         <label for="transfer">Transfer</label>
 
+
+
+
+        <div id="account">
+          Account:
+          <select class="selectAccount">
+            <option value="0">
+              Select Account
+            </option>
+          </select>
+        </div>
         
-        <input type="radio" />
-        Account:
-        <select></select>
+        <div id="from">
+          From:
+          <select class="fromAccount">
+            <option value="0">
+              Select Account
+            </option>
+          </select>
+        </div>
+        
+        <div id="to">
+          To:
+          <select class="toAccount">
+            <option value="0">
+              Select Account
+            </option>
+          </select>
+        </div>
 
-        From:
-        <select></select>
+  
 
-        To:
-        <select></select>
         Category:
         <select></select>
         <input type="text" />
@@ -66,7 +88,7 @@
         <button>Add transaction</button>
       </form>
 
-      
+
 
       Account summary
       <ul></ul>
