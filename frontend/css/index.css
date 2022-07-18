@@ -1,0 +1,81 @@
+* {
+    box-sizing: border-box;
+    
+}
+
+.title {
+    background-color: rgb(22, 117, 206);
+    
+font-size: 40px;
+    
+    padding: 20px 0px 15px 60px;
+    
+   
+   
+}
+
+body {
+    background-color: rgb(207, 224, 248);
+   
+}
+
+main {
+    margin: 30px 50px 0px 50px;
+}
+
+button {
+    background-color: rgb(80, 145, 199);
+    font-weight: bold;
+    border-radius: 4px;
+    border: 0px;
+    
+}
+
+
+
+.newAccount {
+    padding-right: 2rem;
+    
+   
+}
+
+
+form {
+    padding: 2rem;
+}
+
+.newAccountBox {
+  display: flex;
+  padding: 10px 30px 50px 10px;
+  
+  
+
+ 
+}
+
+
+
+li {
+    list-style: none;
+}
+
+.firstBox {
+    display: flex;
+    align-content: center;
+}
+
+p {
+    font-weight: bold;
+}
+
+#account, #from, #to, #category, #amount {
+    padding-bottom: 1rem;
+}
+
+.summary, .filter {
+    padding: 2rem;
+}
+
+table {
+    display: flex;
+}

@@ -22,16 +22,20 @@
 
 
   <body>
-    myTrakr
+    <div class="title">MyTrakr</div>
     <main>
 
-      <form id="newAccount" action="">
+
+      
+      <form class="newAccountBox" id="newAccount" action="">
          <p class="newAccount">New Account:</p>
         <input id="newAccountName" type="text" />
         <button id="newAccountNameButton">Add new account</button>
       </form>
 
-      <form id="newTransaction" action="">
+
+      <div class="firstBox">
+      <div class="allTransactions" id="newTransaction" action="">
         <p class="newTransaction">New Transaction:</p>
         <input class="newTransactionText" type="radio" name="transaction" value="deposit"/>
         <label for="deposit">Deposit</label>
@@ -91,6 +95,7 @@
             <button id="buttonNewCategory" type="button">
               Add new category
             </button>
+            <br></br>
             <label for="descriptionCategory">
               Description
             </label>
@@ -113,14 +118,20 @@
 
 
 
-      </form>
+      </div>
 
 
       <div class="summary">
-        <p>Account summary:</p>
-        <ul class="accountSummary"></ul>
+        <p>Accounts summary:</p>
+        <ul class="accountSummary">
+          <li>Account</li>
+          <li>Balance</li>
+        </ul>
       </div>
       
+    </div>
+
+
       <div class="filter">
         <p>Filter by account:</p>
         <select class="filterAccount">
@@ -141,7 +152,7 @@
       </div>
 
 
-      
+
     </main>
 
 
