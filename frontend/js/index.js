@@ -434,5 +434,44 @@ if (validTransaction) {
 
 
 
+$(".filterAccount").on("change", function (e) {
+  var valueSelected = this.value;
+
+  if (valueSelected == 0) {
+    $("#transactionsTable tr").remove();
+
+    accounts.forEach(account => {
+      let transactions = account.transactions;
+      for (let i = 0; i < transactions.length; i++) {
+        $("#transactionsTable").append(
+          `<tr> <td>${transactions[i].accountId}</td> <td>${account.username}</td> <td>${transactions[i].id}</td> <td>${transactions[i].transaction}</td> <td>${transactions[i].category}</td> <td>${transactions[i].amount}</td> <td>${transactions[i].accountIdFrom == 0 ? `-` : transactions[i].accountIdFrom}</td> <td>${transactions[i].accountIdTo == 0 ? `-` : transactions[i].accountIdTo}</td></tr>`
+        );
+      }
+    });
+    
+  } else {
+    console.log("entrou no if conta")
+    console.log(valueSelected)
+
+    $("#transactionsTable tr").remove();
+
+    for (let i = 0; i < accounts.length; i++) {
+      if (accounts[i].accountID == valueSelected) {
+        console.log("entrou no if account", accounts[i].accountID)
+        let transactions = accounts.transactions;
+        for (let j = 0; j < transactions.length; j++) {
+          $("#transactionsTable").append(
+            `<tr> <td>${transactions[j].accountId}</td> <td>${accounts[i].username}</td> <td>${transactions[j].id}</td> <td>${transactions[j].transaction}</td> <td>${transactions[j].category}</td> <td>${transactions[j].amount}</td> <td>${transactions[j].accountIdFrom == 0 ? `-` : transactions[j].accountIdFrom}</td> <td>${transactions[j].accountIdTo == 0 ? `-` : transactions[j].accountIdTo}</td></tr>`
+          );
+        }
+      }
+    }
+
+  }
+});
+
+
+
+
 
 });
