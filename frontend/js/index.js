@@ -14,10 +14,6 @@ function returnBalance(accountID) {
 
 
 
-
-
-
-
   $.ajax({
     method: "get",
     url: "http://localhost:3000/accounts",
@@ -51,7 +47,7 @@ function returnBalance(accountID) {
 
 
       $(".accountSummary").append(
-        <li id=${newAccount.id}>Username: ${newAccount.username} - Balance: ${newAccount.balance}</li>
+        `<li id=${newAccount.id}>Username: ${newAccount.username} - Balance: ${newAccount.balance}</li>`
       );
     }
     
@@ -65,8 +61,8 @@ function returnBalance(accountID) {
 
 
 
-  
   $("#categoryInfo").hide();
+
 
   $.ajax({
     method: "get",
@@ -86,10 +82,27 @@ function returnBalance(accountID) {
   
     $(".categories").append(<option value="1">Add New Category</option>);
   });
+
+  
   
 
 
+$.ajax({
+    method: "get",
+    url: "http://localhost:3000/accounts",
+    dataType: "json",
+  }).done((accountList) => {
+    console.log("Get transactions.", accountList);
 
+    accountList.forEach(account => {
+      let transactions = account.transactions;
+      for (let i = 0; i < transactions.length; i++) {
+        $("#transactionsTable").append(
+          `<tr> <td>${transactions[i].accountId}</td> <td>${account.username}</td> <td>${transactions[i].id}</td> <td>${transactions[i].transaction}</td> <td>${transactions[i].category}</td> <td>${transactions[i].amount}</td> <td>${transactions[i].accountIdFrom == 0 ? `-` : transactions[i].accountIdFrom}</td> <td>${transactions[i].accountIdTo == 0 ? `-` : transactions[i].accountIdTo}</td></tr>`
+        );
+      }
+    });
+  });
 
   
 
@@ -130,11 +143,23 @@ if (accountName == accounts[i].username) {
 
 
 
+
+
+
 if (storedAccount) {
   const newAccount = {
     username: accountName,
     transactions: [],
   };
+
+
+
+
+
+ 
+
+
+
 
   $.ajax({
     method: "POST",
@@ -191,6 +216,10 @@ $(".categories").on("change", function (e) {
   }
 });
 
+
+
+
+
 $("#buttonNewCategory").click(function () {
   let inputCategory = $("#inputNewCategory").val();
   let validCategory = true;
@@ -237,14 +266,11 @@ $("#buttonNewCategory").click(function () {
         $(".categories").append(
           <option value="${data.name.newCategory}">${data.name.newCategory}</option>
         );
-
-        // Remove the element "Add new category" because it is always the last element
         $('.categories option[value="1"]').remove();
         $(".categories").append(
           <option value="1">Add New Category</option>
         );
-
-        console.log("New category posted.", data);
+        console.log("New category added.", data);
       });
     }
   });
@@ -269,6 +295,8 @@ $('input[type="radio"]').click(function () {
     $("#account").show();
   }
 });
+
+
 
 
 
@@ -387,17 +415,22 @@ if (validTransaction) {
     dataType: "json",
     contentType: "application/json",
   }).done((data) => {
-    alert("New transaction posted.", data);
+    alert("New transaction added.", data);
 
     $("#transactionsTable").append(
-      <tr> <td>${data[0].accountId}</td> <td>${data[0].id}</td> <td>${data[0].id}</td> <td>${data[0].transaction}</td> <td>${data[0].category}</td> <td>${data[0].amount}</td> <td>${data[0].accountIdFrom == 0 ? `- : data[0].accountIdFrom}</td> <td>${data[0].accountIdTo == 0 ? - : data[0].accountIdTo}</td></tr>`
+      `<tr> <td>${data[0].accountId}</td> <td>${data[0].id}</td> <td>${data[0].id}</td> <td>${data[0].transaction}</td> <td>${data[0].category}</td> <td>${data[0].amount}</td> <td>${data[0].accountIdFrom == 0 ? `-` : data[0].accountIdFrom}</td> <td>${data[0].accountIdTo == 0 ? `-` : data[0].accountIdTo}</td></tr>`
     );
 
   });
 } else {
-  alert("The transaction was unsuccessful. Try again.");
+  alert("Unsuccessful transaction.");
 }
 });
+
+
+
+
+
 
 
 
