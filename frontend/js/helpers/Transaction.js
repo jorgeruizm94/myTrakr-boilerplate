@@ -6,6 +6,7 @@ class Transaction {
   commit() {
     if (this.value < 0 && this.amount > this.account.balance) return;
     this.account.transactions.push(this.value);
+    // this.account.balance += this.value;
   }
 }
 

@@ -1,21 +1,16 @@
 $(() => {
+  const accounts = [];
 
-const accounts = [];
+  $("#from").hide();
+  $("#to").hide();
 
-$("#from").hide();
-$("#to").hide();
-
-
-function returnBalance(accountID) {
-  for (let i = 0; i < accounts.length; i++) {
-    if (accountID == accounts[i].id) {
-      return accounts[i].balance;
+  function returnBalance(accountID) {
+    for (let i = 0; i < accounts.length; i++) {
+      if (accountID == accounts[i].id) {
+        return accounts[i].balance;
+      }
     }
   }
-}
-
-
-
 
   $.ajax({
     method: "get",
@@ -30,7 +25,6 @@ function returnBalance(accountID) {
       newAccount.transactions = accountList[i].transactions;
       accounts.push(newAccount);
 
-    
       $(".selectAccount").append(
         `<option value="${newAccount.id}">${newAccount.username}</option>`
       );
@@ -43,30 +37,17 @@ function returnBalance(accountID) {
         `<option value="${newAccount.id}">${newAccount.username}</option>`
       );
 
-    
       $(".filterAccount").append(
         `<option value="${newAccount.id}">${newAccount.username}</option>`
       );
-
-
 
       $(".accountSummary").append(
         `<li id=${newAccount.id}><strong>Username:</strong> ${newAccount.username} || <strong>Balance:</strong> ${newAccount.balance}</li>`
       );
     }
-    
   });
 
-
-
-
-
-
-
-
-
   $("#categoryInfo").hide();
-
 
   $.ajax({
     method: "get",
@@ -74,24 +55,17 @@ function returnBalance(accountID) {
     dataType: "json",
   }).done((categoriesList) => {
     console.log("Get categories value.", categoriesList);
-  
-  
-  
+
     for (let i = 0; i < categoriesList.length; i++) {
       $(".categories").append(
         `<option value="${categoriesList[i].name.newCategory}">${categoriesList[i].name.newCategory}</option>`
       );
     }
-  
-  
+
     $(".categories").append(`<option value="1">Add New Category</option>`);
   });
 
-  
-  
-
-
-$.ajax({
+  $.ajax({
     method: "get",
     url: "http://localhost:3000/accounts",
     dataType: "json",
